@@ -1,38 +1,74 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body{
+    height: 100vh;
+    background: linear-gradient(to left top, rgb(136, 69, 35), rgb(119, 187, 219));
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Cinzel Decorative', cursive;
+    text-shadow: 2px 2px 8px black;
+    color: wheat;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.gamecontainer{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.circle{
+    background-color: wheat;
+    height: 20vh;
+    width: 12vw;
+    border-radius: 50%;
 }
 
-.App-link {
-  color: #61dafb;
+.circleInactive{
+    background-color: wheat;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.circleActive{
+    background-color: green;
+}
+
+.circlecontainer{
+    display: flex;
+    column-gap: 10vw;
+}
+
+.buttoncontainer{
+    display: flex;
+    align-items: center;
+    column-gap: 5vw;
+}
+
+.myButtonClass{
+    height: 5vh;
+    width: 8vw;
+    font-family: 'Cinzel Decorative', cursive;
+    background-color:rgb(107, 161, 186);
+    border-width: 0;
+    border-radius: 12px;
+    font-size: 1.2rem;
+    color: wheat;
+    text-shadow: 2px 2px 8px black;
+}
+
+.overlay{
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(black, black, black, 0.5);
+}
+
+.popup{
+    position: relative;
+    background: linear-gradient(to left top, rgb(136, 69, 35), rgb(119, 187, 219));
 }
