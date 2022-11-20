@@ -2,7 +2,7 @@ import React from "react";
 import Circle from "./Circle.js"; 
 import GameOver from "./GameOver.js"
 import clickSound from "./assets/click.wav";
-import startSound from "./assets/ Omnissiah.mp3";
+import startSound from "./assets/Omnissiah.mp3";
 import stopSound from "./assets/stop.wav";
 import "./App.css";
 
