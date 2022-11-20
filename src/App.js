@@ -5,7 +5,6 @@ import clickSound from "./assets/click.wav";
 import startSound from "./assets/ Omnissiah.mp3";
 import stopSound from "./assets/stop.wav";
 import "./App.css";
-import { click } from "@testing-library/user-event/dist/click.js";
 
 class App extends React.Component
 {
@@ -19,9 +18,9 @@ class App extends React.Component
         this.SetNextActiveDrum = this.SetNextActiveDrum.bind(this);
         this.StartTheRound = this.StartTheRound.bind(this);
         this.ClosePopUp = this.ClosePopUp.bind(this);
-        this.previousDrumId = null; //to state (poten.)
-        this.nextDrumId = null; //to state (poten.)
-        this.theTimer = null; //to state
+        this.previousDrumId = null;
+        this.nextDrumId = null;
+        this.theTimer = null;
         this.time = 5000;
         this.clickSound = new Audio(clickSound);
         this.startSound = new Audio(startSound);
