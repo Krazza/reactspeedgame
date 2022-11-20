@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Metamorphous&display=swap');
 
 *{
     margin: 0;
@@ -7,12 +7,14 @@
 
 body{
     height: 100vh;
-    background: linear-gradient(to left top, rgb(136, 69, 35), rgb(119, 187, 219));
+    background-image: url("/public/maxresdefault.jpeg");
     background-repeat: no-repeat;
-    background-size: cover;
-    font-family: 'Cinzel Decorative', cursive;
+    background-size: auto;
+    background-color: black;
+    background-position: center;
+    font-family: 'Metamorphous', cursive;
     text-shadow: 2px 2px 8px black;
-    color: wheat;
+    color:darkturquoise;
 }
 
 .gamecontainer{
@@ -23,19 +25,37 @@ body{
     align-items: center;
 }
 
+.gamecontainer h1{
+    font-size: 3rem;
+    align-self: flex-start;
+    padding-left: 3%;
+}
+
+.gamecontainer h2{
+    font-size: 2rem;
+    align-self: flex-start;
+    padding-left: 3%;
+}
+
+.score{
+    color:darkturquoise;
+}
+
 .circle{
     background-color: wheat;
     height: 20vh;
     width: 12vw;
     border-radius: 50%;
+    box-shadow: 1px 1px 20px 6px rgb(18 0 0);
 }
 
 .circleInactive{
-    background-color: wheat;
+    background-color:rgb(90 17 17);
 }
 
 .circleActive{
-    background-color: green;
+    background-color: rgb(24, 102, 24);
+    box-shadow: 1px 1px 20px 6px rgb(24, 102, 24);
 }
 
 .circlecontainer{
@@ -50,25 +70,38 @@ body{
 }
 
 .myButtonClass{
-    height: 5vh;
-    width: 8vw;
+    height: 7vh;
+    width: 10vw;
     font-family: 'Cinzel Decorative', cursive;
-    background-color:rgb(107, 161, 186);
+    background-color:darkturquoise;
     border-width: 0;
     border-radius: 12px;
-    font-size: 1.2rem;
-    color: wheat;
+    font-size: 1.65rem;
+    color: rgb(136, 5, 5);
     text-shadow: 2px 2px 8px black;
+    font-weight: 900;
 }
 
 .overlay{
-    position: relative;
+    position: absolute;
     height: 100vh;
     width: 100vw;
-    background-color: rgba(black, black, black, 0.5);
+    background-color: rgba(5, 24, 32, 0.5);
 }
 
 .popup{
     position: relative;
-    background: linear-gradient(to left top, rgb(136, 69, 35), rgb(119, 187, 219));
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin: 20% auto auto 15%;
+    background: linear-gradient(to bottom, rgb(40, 32, 32), rgb(36, 15, 15));
+    height: 40vh;
+    width: 70vw;
+    border-radius: 22px;
+}
+
+.popup h2{
+    align-self: center;
 }

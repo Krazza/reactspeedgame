@@ -1,25 +1,36 @@
 import React from "react";
 import Circle from "./Circle.js"; 
+import GameOver from "./GameOver.js"
+import clickSound from "./assets/click.wav";
+import startSound from "./assets/ Omnissiah.mp3";
+import stopSound from "./assets/stop.wav";
 import "./App.css";
+import { click } from "@testing-library/user-event/dist/click.js";
 
 class App extends React.Component
 {
     constructor()
     {
         super();
-        
         this.WinRound = this.WinRound.bind(this);
+        this.LostRound = this.LostRound.bind(this);
         this.GameOver = this.GameOver.bind(this);
         this.GetRandomInt = this.GetRandomInt.bind(this);
         this.SetNextActiveDrum = this.SetNextActiveDrum.bind(this);
         this.StartTheRound = this.StartTheRound.bind(this);
+        this.ClosePopUp = this.ClosePopUp.bind(this);
         this.previousDrumId = null; //to state (poten.)
         this.nextDrumId = null; //to state (poten.)
         this.theTimer = null; //to state
         this.time = 5000;
+        this.clickSound = new Audio(clickSound);
+        this.startSound = new Audio(startSound);
+        this.stopSound = new Audio(stopSound);
         this.state = {
             score : 0,
+            lives : 3,
             showpopup: false,
+            gameinprogress: false,
             myDrumKit : [<Circle key="0" id="0" status={false}/>, 
                           <Circle key="1" id="1" status={false}/>, 
                           <Circle key="2" id="2" status={false}/>, 
@@ -30,20 +41,26 @@ class App extends React.Component
     render()
     {
         return(<main className="gamecontainer">
-            <h1>Welcome to the game</h1>
-            <h2>Your score: {this.state.score}</h2>
+            <h1>Welcome</h1>
+            <h2>Current Score: {this.state.score}</h2>
+            <h2 className="score">Remaining blessings: {this.state.lives}</h2>
             <div className="circlecontainer">{this.state.myDrumKit[0]}{this.state.myDrumKit[1]}{this.state.myDrumKit[2]}{this.state.myDrumKit[3]}</div>
             <div className="buttoncontainer">
-                <button className="myButtonClass" id="start" name="start" onClick={this.StartTheRound}> Start </button>
-                <button className="myButtonClass" id="stop" name="stop" onClick={this.GameOver} > Stop </button>
+                { !this.state.gameinprogress && <button className="myButtonClass" id="start" name="start" onClick={this.StartTheRound}> START </button> }
+                { this.state.gameinprogress && <button className="myButtonClass" id="stop" name="stop" onClick={this.GameOver} > STOP </button> }
             </div>
+            {this.state.showpopup && <GameOver score={this.state.score} closer={this.ClosePopUp}/>}
         </main>
         );
     }
 
     StartTheRound()
     {
-        console.log("round started");
+        if(this.startSound.paused)
+        {
+            this.startSound.play();
+        }
+
         this.SetNextActiveDrum();
         let temp = this.state.myDrumKit;
 
@@ -57,15 +74,17 @@ class App extends React.Component
                 temp[drum.props.id] = <Circle key={drum.props.id} id={drum.props.id} status={false} GameOver={this.GameOver}/>;
             }
         })
-        this.setState({myDrumKit: temp});
 
-        this.theTimer = setTimeout(this.GameOver, this.time);
+        this.setState({myDrumKit: temp, gameinprogress: true});
+
+        this.theTimer = setTimeout(this.LostRound, this.time);
     }
 
     WinRound()
     {
         let temp = this.state.myDrumKit;
         //play sound
+        this.clickSound.play();
         this.setState({score: this.state.score + 1 });
 
         clearTimeout(this.theTimer);
@@ -82,16 +101,27 @@ class App extends React.Component
         this.StartTheRound();    
     }
 
-    GameOver()
+    LostRound()
     {
-        console.log("game over")
+        if(this.state.lives > 0)
+        {
+            this.setState({lives: this.state.lives - 1});
+            this.StartTheRound();
+            return;
+        }
+
+        this.GameOver();
+    }
+
+    GameOver() 
+    {
+        this.stopSound.play();
         clearTimeout(this.theTimer);
         let temp = this.state.myDrumKit;
-        temp.forEach(drum => 
-        {
-            temp[drum.props.id] = <Circle key={drum.props.id} id={drum.props.id} status = {false} />;
-        })
-        this.setState({myDrumKit: temp, score: 0});
+        temp.forEach(drum => {
+            temp[drum.props.id] = <Circle key={drum.props.id} id={drum.props.id} status={false} />;
+        });
+        this.setState({ myDrumKit: temp, gameinprogress: false, lives: 3, showpopup: true });
         this.theTimer = 5000;
     }
 
@@ -105,6 +135,11 @@ class App extends React.Component
     
         this.previousDrumId = this.nextDrumId;
         //next next drum id
+    }
+
+    ClosePopUp()
+    {
+        this.setState({showpopup: false, score: 0});
     }
 
     GetRandomInt()
