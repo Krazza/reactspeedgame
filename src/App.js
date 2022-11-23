@@ -65,7 +65,7 @@ class App extends React.Component
 
         temp.forEach(drum =>
         {
-            if(drum.props.id === this.nextDrumId)
+            if(drum.props.id === String(this.nextDrumId))
             {
                 temp[this.nextDrumId] = <Circle key={temp[this.nextDrumId].props.id} id={temp[this.nextDrumId].props.id} status={true} WinRound={this.WinRound}/>;
             } else
